@@ -1,0 +1,18 @@
+{
+    "name": "Bahnhofsfotos",
+    "short_name": "Bahnhofsfotos",
+    "start_url": ".",
+    "display": "minimal-ui",
+    "background_color": "#0175C2",
+    "theme_color": "#0175C2",
+    "description": "Bahnhofsfoto-App for Android and iOS using Flutter",
+    "orientation": "portrait-primary",
+    "prefer_related_applications": false,
+    "icons": [
+        {
+            "src": "icons/Icon-192.png",
+            "sizes": "192x192",
+            "type": "image/png"
+        }
+    ]
+}
