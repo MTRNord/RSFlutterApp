@@ -37,7 +37,6 @@ android {
     }
 
     defaultConfig {
-        // TODO: Specify your own unique Application ID (https://developer.android.com/studio/build/application-id.html).
         applicationId "de.bahnhoefe.deutschlands.bahnhofsfotos"
         minSdkVersion 16
         targetSdkVersion 29
@@ -52,6 +51,9 @@ android {
             // Signing with the debug keys for now, so `flutter run --release` works.
             signingConfig signingConfigs.debug
         }
+        debug {
+            applicationIdSuffix '.debug'
+            versionNameSuffix "-debug"
     }
 }
 

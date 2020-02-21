@@ -9,7 +9,8 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Bahnhofsfotos',
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+        primaryColor: Color(0xffc71c4d),
+        accentColor: Color(0xffD0C332),
       ),
       home: Container(),
     );
