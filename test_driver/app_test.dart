@@ -5,7 +5,7 @@ import 'package:test/test.dart';
 void main() {
   group('Bahnhofsfotos App', () {
     FlutterDriver driver;
-    final String backButtonToolTip = "Back"; // Set to your preferred language
+    //final String backButtonToolTip = "Back"; // Set to your preferred language
 
     // Connect to the Flutter driver before running any tests
     setUpAll(() async {
@@ -19,7 +19,7 @@ void main() {
       }
     });
 
-    var waitFor = (String key) async {
+    /*var waitFor = (String key) async {
       print("[Integration Test] Wait for $key");
       await driver.waitFor(find.byValueKey(key));
     };
@@ -43,6 +43,6 @@ void main() {
     var goBack = () async {
       await driver.waitFor(find.byTooltip(backButtonToolTip));
       await driver.tap(find.byTooltip(backButtonToolTip));
-    };
+    };*/
   });
 }
