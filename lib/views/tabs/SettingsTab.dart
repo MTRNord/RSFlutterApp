@@ -7,9 +7,12 @@ class SettingsTab extends StatefulWidget {
   SettingsTabState createState() => SettingsTabState();
 }
 
-class SettingsTabState extends State<SettingsTab> {
+class SettingsTabState extends State<SettingsTab>
+    with AutomaticKeepAliveClientMixin<SettingsTab> {
   @override
   Widget build(BuildContext context) {
+    super.build(context);
+
     return Material(
       child: SettingsList(sections: [
         SettingsSection(
@@ -33,4 +36,7 @@ class SettingsTabState extends State<SettingsTab> {
       ]),
     );
   }
+
+  @override
+  bool get wantKeepAlive => true;
 }
