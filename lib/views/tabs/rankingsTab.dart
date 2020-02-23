@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import '../../repos/repositories.dart';
 
 class RankingsTab extends StatelessWidget {
@@ -37,15 +38,53 @@ class RankingsTab extends StatelessWidget {
                   return Divider();
                 },
                 itemBuilder: (BuildContext context, int index) {
-                  return ListTile(
-                    leading: Text(
-                      "${(index + 1)}.",
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold,
+                  if (index == 0) {
+                    return ListTile(
+                      leading: SvgPicture.asset(
+                        "assets/crown_gold.svg",
+                        semanticsLabel: 'Golden Crown',
+                        width: 50,
+                        height: 50,
                       ),
-                    ),
-                    title: Text(scores[index][1]),
-                  );
+                      title: Text(scores[index][1]),
+                    );
+                  } else if (index == 1) {
+                    return ListTile(
+                      leading: SvgPicture.asset(
+                        "assets/crown_silver.svg",
+                        semanticsLabel: 'Silver Crown',
+                        width: 50,
+                        height: 50,
+                      ),
+                      title: Text(scores[index][1]),
+                    );
+                  } else if (index == 2) {
+                    return ListTile(
+                      leading: SvgPicture.asset(
+                        "assets/crown_bronze.svg",
+                        semanticsLabel: 'Bronze Crown',
+                        width: 50,
+                        height: 50,
+                      ),
+                      title: Text(scores[index][1]),
+                    );
+                  } else {
+                    return ListTile(
+                      leading: SizedBox(
+                        width: 50,
+                        height: 50,
+                        child: Center(
+                          child: Text(
+                            "${(index + 1)}.",
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ),
+                      ),
+                      title: Text(scores[index][1]),
+                    );
+                  }
                 },
               );
             }

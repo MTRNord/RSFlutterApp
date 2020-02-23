@@ -34,7 +34,7 @@ class DetailsPage extends StatelessWidget {
             onPressed: () async {
               Country country = (await railwayStationsRepository.getCountries())
                   .firstWhere((element) => element.code == station.country);
-              launch(country.timetableUrlTemplate
+              await launch(country.timetableUrlTemplate
                   .replaceAll("{id}", station.idStr)
                   .replaceAll("{title}", station.title)
                   .replaceAll("{DS100}", station.ds100));
