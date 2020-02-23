@@ -91,7 +91,9 @@ class RankingsTab extends StatelessWidget {
             // TODO handle missing date
             return Container();
           default:
-            return CircularProgressIndicator();
+            return Center(
+              child: CircularProgressIndicator(),
+            );
         }
       },
     );

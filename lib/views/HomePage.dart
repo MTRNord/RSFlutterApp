@@ -2,13 +2,14 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:http/http.dart' as http;
-import 'package:rs_flutter_app/views/tabs/rankingsTab.dart';
 
 import '../blocs/MapBloc.dart';
 import '../repos/RailwayStationsApiClient.dart';
 import '../repos/repositories.dart';
 import 'tabs/MapTab.dart';
+import 'tabs/RankingsTab.dart';
 import 'tabs/SettingsTab.dart';
+import 'tabs/StationsTab.dart';
 
 class HomePage extends StatelessWidget {
   @override
@@ -21,7 +22,8 @@ class HomePage extends StatelessWidget {
     );
 
     return DefaultTabController(
-      length: 3,
+      length: 4,
+      initialIndex: 3,
       child: Scaffold(
         bottomNavigationBar: Container(
           color: Theme.of(context).primaryColor,
@@ -29,20 +31,36 @@ class HomePage extends StatelessWidget {
             labelColor: Colors.white,
             unselectedLabelColor: Colors.white70,
             indicatorSize: TabBarIndicatorSize.tab,
-            indicatorPadding: EdgeInsets.all(5.0),
+            //indicatorPadding: EdgeInsets.all(5.0),
             indicatorColor: Theme.of(context).accentColor,
             tabs: [
               Tab(
-                icon: Icon(CupertinoIcons.location),
+                icon: Icon(
+                  CupertinoIcons.location,
+                  size: 20,
+                ),
                 text: 'Map',
               ),
               Tab(
-                icon: Icon(CupertinoIcons.info),
+                icon: Icon(
+                  CupertinoIcons.info,
+                  size: 20,
+                ),
                 text: 'Rangliste',
               ),
               Tab(
-                icon: Icon(CupertinoIcons.settings),
-                text: 'Einstellungen',
+                icon: Icon(
+                  CupertinoIcons.train_style_one,
+                  size: 20,
+                ),
+                text: 'Bahnhöfe',
+              ),
+              Tab(
+                icon: Icon(
+                  CupertinoIcons.profile_circled,
+                  size: 20,
+                ),
+                text: 'Meine Daten',
               ),
             ],
           ),
@@ -70,7 +88,15 @@ class HomePage extends StatelessWidget {
             ),
             Scaffold(
               appBar: AppBar(
-                title: Text("Einstellungen"),
+                title: Text("Bahnhöfe"),
+              ),
+              body: StationsTab(
+                railwayStationsRepository: railwayStationsRepository,
+              ),
+            ),
+            Scaffold(
+              appBar: AppBar(
+                title: Text("Meine Daten"),
               ),
               body: SettingsTab(),
             ),
