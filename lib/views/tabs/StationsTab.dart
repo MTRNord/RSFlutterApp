@@ -5,18 +5,31 @@ import '../../models/models.dart';
 import '../../repos/repositories.dart';
 import '../DetailsPage.dart';
 
-class StationsTab extends StatelessWidget {
+class StationsTab extends StatefulWidget {
   final RailwayStationsRepository railwayStationsRepository;
 
   StationsTab({@required this.railwayStationsRepository})
       : assert(railwayStationsRepository != null);
 
-  Future<List<Station>> getStations() {
-    return this.railwayStationsRepository.getStations();
+  @override
+  StationsTabState createState() => StationsTabState();
+}
+
+class StationsTabState extends State<StationsTab>
+    with AutomaticKeepAliveClientMixin<StationsTab> {
+  List<Station> stations;
+
+  Future<List<Station>> getStations() async {
+    if (stations == null) {
+      stations = await widget.railwayStationsRepository.getStations();
+    }
+    return stations;
   }
 
   @override
   Widget build(BuildContext context) {
+    super.build(context);
+
     return FutureBuilder(
       future: getStations(),
       builder: (BuildContext context, AsyncSnapshot<List<Station>> snapshot) {
@@ -49,7 +62,7 @@ class StationsTab extends StatelessWidget {
                           builder: (BuildContext context) => DetailsPage(
                             station: stations[index],
                             railwayStationsRepository:
-                                railwayStationsRepository,
+                                widget.railwayStationsRepository,
                           ),
                         ),
                       );
@@ -68,4 +81,7 @@ class StationsTab extends StatelessWidget {
       },
     );
   }
+
+  @override
+  bool get wantKeepAlive => true;
 }

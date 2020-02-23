@@ -23,7 +23,7 @@ class HomePage extends StatelessWidget {
 
     return DefaultTabController(
       length: 4,
-      initialIndex: 3,
+      initialIndex: 2,
       child: Scaffold(
         bottomNavigationBar: Container(
           color: Theme.of(context).primaryColor,

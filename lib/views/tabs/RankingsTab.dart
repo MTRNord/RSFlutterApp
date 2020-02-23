@@ -1,20 +1,34 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+
 import '../../repos/repositories.dart';
 
-class RankingsTab extends StatelessWidget {
+class RankingsTab extends StatefulWidget {
   final RailwayStationsRepository railwayStationsRepository;
 
   RankingsTab({@required this.railwayStationsRepository})
       : assert(railwayStationsRepository != null);
 
-  Future<List<List<String>>> getScores() {
-    return this.railwayStationsRepository.getScores();
+  @override
+  RankingsTabState createState() => RankingsTabState();
+}
+
+class RankingsTabState extends State<RankingsTab>
+    with AutomaticKeepAliveClientMixin<RankingsTab> {
+  List<List<String>> scores;
+
+  Future<List<List<String>>> getScores() async {
+    if (scores == null) {
+      scores = await widget.railwayStationsRepository.getScores();
+    }
+    return scores;
   }
 
   @override
   Widget build(BuildContext context) {
+    super.build(context);
+
     return FutureBuilder(
       future: getScores(),
       builder:
@@ -98,4 +112,7 @@ class RankingsTab extends StatelessWidget {
       },
     );
   }
+
+  @override
+  bool get wantKeepAlive => true;
 }
