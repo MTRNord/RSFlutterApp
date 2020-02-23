@@ -72,12 +72,11 @@ class App extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return CupertinoApp(
+    return MaterialApp(
       title: 'Bahnhofsfotos',
-      theme: CupertinoThemeData(
-        brightness: Brightness.light,
+      theme: ThemeData(
         primaryColor: Color(0xffc71c4d),
-        primaryContrastingColor: Color(0xffD0C332),
+        accentColor: Color(0xffD0C332),
       ),
       home: BlocBuilder<AuthenticationBloc, AuthenticationState>(
         builder: (context, state) {

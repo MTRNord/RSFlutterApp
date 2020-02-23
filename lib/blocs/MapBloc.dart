@@ -23,7 +23,8 @@ class MapBloc extends Bloc<MapEvent, MapState> {
         final List<Station> stations =
             await railwayStationsRepository.getStations();
         yield MapLoaded(stations: stations);
-      } catch (_) {
+      } catch (e) {
+        debugPrint(e.toString());
         yield MapError();
       }
     } else if (event is RenderMap) {

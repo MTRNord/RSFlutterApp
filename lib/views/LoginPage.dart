@@ -2,12 +2,12 @@
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../repos/UserRepository.dart';
-import '../blocs/LoginBloc.dart';
+
 import '../blocs/AuthenticationBloc.dart';
+import '../blocs/LoginBloc.dart';
 import '../components/LoginForm.dart';
+import '../repos/UserRepository.dart';
 
 class LoginPage extends StatelessWidget {
   final UserRepository userRepository;
@@ -18,11 +18,11 @@ class LoginPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return CupertinoPageScaffold(
-      navigationBar: CupertinoNavigationBar(
-        middle: const Text('Login'),
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Login'),
       ),
-      child: BlocProvider(
+      body: BlocProvider(
         create: (context) {
           return LoginBloc(
             authenticationBloc: BlocProvider.of<AuthenticationBloc>(context),

@@ -13,28 +13,26 @@ class SettingsTabState extends State<SettingsTab>
   Widget build(BuildContext context) {
     super.build(context);
 
-    return Material(
-      child: SettingsList(sections: [
-        SettingsSection(
-          title: 'Bahnhofsdaten',
-          tiles: [
-            SettingsTile(
-              title: 'Länderdaten aktualisieren',
-              leading: Icon(Icons.language),
-              onTap: () {},
-            ),
-          ],
-        ),
-        SettingsSection(
-          title: 'Lizensierung',
-          tiles: [],
-        ),
-        SettingsSection(
-          title: 'Verlinkung',
-          tiles: [],
-        ),
-      ]),
-    );
+    return SettingsList(sections: [
+      SettingsSection(
+        title: 'Bahnhofsdaten',
+        tiles: [
+          SettingsTile(
+            title: 'Länderdaten aktualisieren',
+            leading: Icon(Icons.language),
+            onTap: () {},
+          ),
+        ],
+      ),
+      SettingsSection(
+        title: 'Lizensierung',
+        tiles: [],
+      ),
+      SettingsSection(
+        title: 'Verlinkung',
+        tiles: [],
+      ),
+    ]);
   }
 
   @override

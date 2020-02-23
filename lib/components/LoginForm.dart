@@ -39,15 +39,19 @@ class _LoginFormState extends State<LoginForm> {
       },
       child: BlocBuilder<LoginBloc, LoginState>(
         builder: (context, state) {
-          return SafeArea(
+          return Form(
             child: Column(
               children: [
-                CupertinoTextField(
-                  placeholder: 'username',
+                TextFormField(
+                  decoration: InputDecoration(
+                    hintText: 'username',
+                  ),
                   controller: _usernameController,
                 ),
-                CupertinoTextField(
-                  placeholder: 'password',
+                TextFormField(
+                  decoration: InputDecoration(
+                    hintText: 'password',
+                  ),
                   controller: _passwordController,
                   obscureText: true,
                 ),

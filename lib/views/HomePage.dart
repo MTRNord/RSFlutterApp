@@ -8,52 +8,50 @@ import 'tabs/SettingsTab.dart';
 class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return CupertinoTabScaffold(
-      tabBar: CupertinoTabBar(
-        items: const <BottomNavigationBarItem>[
-          BottomNavigationBarItem(
-            icon: Icon(CupertinoIcons.location),
-            title: Text('Map'),
+    return DefaultTabController(
+      length: 3,
+      child: Scaffold(
+        bottomNavigationBar: Container(
+          color: Theme.of(context).primaryColor,
+          child: TabBar(
+            labelColor: Colors.white,
+            unselectedLabelColor: Colors.white70,
+            indicatorSize: TabBarIndicatorSize.tab,
+            indicatorPadding: EdgeInsets.all(5.0),
+            indicatorColor: Theme.of(context).accentColor,
+            tabs: [
+              Tab(
+                icon: Icon(CupertinoIcons.location),
+                text: 'Map',
+              ),
+              Tab(
+                icon: Icon(CupertinoIcons.info),
+                text: 'Rangliste',
+              ),
+              Tab(
+                icon: Icon(CupertinoIcons.settings),
+                text: 'Einstellungen',
+              ),
+            ],
           ),
-          BottomNavigationBarItem(
-            icon: Icon(CupertinoIcons.info),
-            title: Text('Rangliste'),
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(CupertinoIcons.settings),
-            title: Text('Einstellungen'),
-          ),
-        ],
-      ),
-      tabBuilder: (context, index) {
-        switch (index) {
-          case 0:
-            return CupertinoTabView(builder: (context) {
-              return CupertinoPageScaffold(
-                child: MapTab(),
-              );
-            });
-          case 1:
-            return CupertinoTabView(builder: (context) {
-              return CupertinoPageScaffold(
-                child: Container(),
-              );
-            });
-          case 2:
-            return CupertinoTabView(builder: (context) {
-              return CupertinoPageScaffold(
-                navigationBar: CupertinoNavigationBar(
-                  middle: Text("Einstellungen"),
-                ),
-                child: SettingsTab(),
-              );
-            });
-        }
-        return CupertinoPageScaffold(
-          child: Container(),
-        );
-      },
-      /* child: Container(
+        ),
+        body: TabBarView(
+          children: [
+            Scaffold(
+              body: MapTab(),
+            ),
+            Scaffold(
+              body: Container(),
+            ),
+            Scaffold(
+              appBar: AppBar(
+                title: Text("Einstellungen"),
+              ),
+              body: SettingsTab(),
+            ),
+          ],
+        ),
+        /* child: Container(
         child: Center(
             child: RaisedButton(
           child: Text('logout'),
@@ -62,6 +60,7 @@ class HomePage extends StatelessWidget {
           },
         )),
       ),*/
+      ),
     );
   }
 }
