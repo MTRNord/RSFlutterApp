@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:http/http.dart' as http;
+import 'package:rs_flutter_app/views/tabs/rankingsTab.dart';
 
 import '../blocs/MapBloc.dart';
 import '../repos/RailwayStationsApiClient.dart';
@@ -60,7 +61,12 @@ class HomePage extends StatelessWidget {
               ),
             ),
             Scaffold(
-              body: Container(),
+              appBar: AppBar(
+                title: Text("Rangliste"),
+              ),
+              body: RankingsTab(
+                railwayStationsRepository: railwayStationsRepository,
+              ),
             ),
             Scaffold(
               appBar: AppBar(

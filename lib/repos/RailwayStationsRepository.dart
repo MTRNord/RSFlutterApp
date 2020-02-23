@@ -9,11 +9,15 @@ class RailwayStationsRepository {
   RailwayStationsRepository({@required this.railwayStationsApiClient})
       : assert(railwayStationsApiClient != null);
 
-  Future<List<Country>> getCountries() async {
-    return await railwayStationsApiClient.getCountries();
+  Future<List<Country>> getCountries() {
+    return railwayStationsApiClient.getCountries();
   }
 
-  Future<List<Station>> getStations() async {
-    return await railwayStationsApiClient.getStations();
+  Future<List<Station>> getStations() {
+    return railwayStationsApiClient.getStations();
+  }
+
+  Future<List<List<String>>> getScores() {
+    return railwayStationsApiClient.getScores();
   }
 }

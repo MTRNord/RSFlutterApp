@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:flutter/foundation.dart';
+import 'package:grizzly_io/grizzly_io.dart';
 import 'package:http/http.dart' as http;
 import 'package:meta/meta.dart';
 
@@ -42,5 +43,16 @@ class RailwayStationsApiClient {
       stations.add(Station.fromJson(element));
     });
     return stations;
+  }
+
+  Future<List<List<String>>> getScores() async {
+    final scoresUrl = '$baseUrl/photographers.txt';
+    final scoresResponse = await this.httpClient.get(scoresUrl);
+    if (scoresResponse.statusCode != 200) {
+      throw Exception('error getting stations');
+    }
+
+    List<List<String>> scores = parseTsv(scoresResponse.body);
+    return scores;
   }
 }
