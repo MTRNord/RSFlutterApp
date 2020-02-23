@@ -2,14 +2,10 @@ import 'package:bloc/bloc.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:http/http.dart' as http;
 
 import 'blocs/AuthenticationBloc.dart';
-import 'blocs/MapBloc.dart';
 import 'components/LoadingIndicator.dart';
 import 'events/AuthenticationEvent.dart';
-import 'repos/RailwayStationsApiClient.dart';
-import 'repos/RailwayStationsRepository.dart';
 import 'repos/UserRepository.dart';
 import 'states/AuthenticationState.dart';
 import 'views/HomePage.dart';
@@ -39,13 +35,6 @@ void main() {
   BlocSupervisor.delegate = SimpleBlocDelegate();
   final userRepository = UserRepository();
 
-  final RailwayStationsRepository railwayStationsRepository =
-      RailwayStationsRepository(
-    railwayStationsApiClient: RailwayStationsApiClient(
-      httpClient: http.Client(),
-    ),
-  );
-
   runApp(
     BlocProvider<AuthenticationBloc>(
       create: (context) {
@@ -54,7 +43,6 @@ void main() {
       },
       child: App(
         userRepository: userRepository,
-        railwayStationsRepository: railwayStationsRepository,
       ),
     ),
   );
@@ -62,13 +50,11 @@ void main() {
 
 class App extends StatelessWidget {
   final UserRepository userRepository;
-  final RailwayStationsRepository railwayStationsRepository;
 
-  App(
-      {Key key,
-      @required this.userRepository,
-      @required this.railwayStationsRepository})
-      : super(key: key);
+  App({
+    Key key,
+    @required this.userRepository,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -84,18 +70,10 @@ class App extends StatelessWidget {
             return SplashPage();
           }
           if (state is AuthenticationAuthenticated) {
-            return BlocProvider(
-              create: (context) =>
-                  MapBloc(railwayStationsRepository: railwayStationsRepository),
-              child: HomePage(),
-            );
+            return HomePage();
           }
           if (state is AuthenticationNeeded) {
-            return BlocProvider(
-              create: (context) =>
-                  MapBloc(railwayStationsRepository: railwayStationsRepository),
-              child: HomePage(),
-            );
+            return HomePage();
           }
           if (state is AuthenticationLoading) {
             return LoadingIndicator();

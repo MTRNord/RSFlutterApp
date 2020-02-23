@@ -1,13 +1,24 @@
-// TODO fix placeholder
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:http/http.dart' as http;
 
+import '../blocs/MapBloc.dart';
+import '../repos/RailwayStationsApiClient.dart';
+import '../repos/repositories.dart';
 import 'tabs/MapTab.dart';
 import 'tabs/SettingsTab.dart';
 
 class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    final RailwayStationsRepository railwayStationsRepository =
+        RailwayStationsRepository(
+      railwayStationsApiClient: RailwayStationsApiClient(
+        httpClient: http.Client(),
+      ),
+    );
+
     return DefaultTabController(
       length: 3,
       child: Scaffold(
@@ -36,9 +47,17 @@ class HomePage extends StatelessWidget {
           ),
         ),
         body: TabBarView(
+          physics: NeverScrollableScrollPhysics(),
           children: [
             Scaffold(
-              body: MapTab(),
+              body: BlocProvider(
+                create: (context) => MapBloc(
+                  railwayStationsRepository: railwayStationsRepository,
+                ),
+                child: MapTab(
+                  railwayStationsRepository: railwayStationsRepository,
+                ),
+              ),
             ),
             Scaffold(
               body: Container(),

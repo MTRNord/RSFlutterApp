@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_map/flutter_map.dart';
@@ -8,9 +7,16 @@ import 'package:latlong/latlong.dart';
 import '../../blocs/MapBloc.dart';
 import '../../events/MapEvent.dart';
 import '../../models/models.dart';
+import '../../repos/repositories.dart';
 import '../../states/MapState.dart';
+import '../DetailsPage.dart';
 
 class MapTab extends StatefulWidget {
+  final RailwayStationsRepository railwayStationsRepository;
+
+  MapTab({@required this.railwayStationsRepository})
+      : assert(railwayStationsRepository != null);
+
   @override
   MapTabState createState() => MapTabState();
 }
@@ -104,11 +110,25 @@ class MapTabState extends State<MapTab>
                 color: Colors.black12,
                 borderStrokeWidth: 3,
               ),
+              onMarkerTap: (Marker marker) {
+                Station station = stations.firstWhere((element) =>
+                    element.lat == marker.point.latitude &&
+                    element.lon == marker.point.longitude);
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (BuildContext context) => DetailsPage(
+                      station: station,
+                      railwayStationsRepository:
+                          widget.railwayStationsRepository,
+                    ),
+                  ),
+                );
+              },
               builder: (context, markers) {
                 return ClipRRect(
                   borderRadius: BorderRadius.circular(50),
                   child: Container(
-                    color: CupertinoTheme.of(context).primaryColor,
+                    color: Theme.of(context).primaryColor,
                     child: Center(
                       child: Text(
                         markers.length.toString(),
