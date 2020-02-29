@@ -56,7 +56,7 @@ class StationsTabState extends State<StationsTab>
     super.dispose();
   }
 
-  Future<List<Station>> getStations(String filterText) async {
+  Future<List<Station>> getStations() async {
     if (stations == null) {
       List<Station> stationsL =
           await widget.railwayStationsRepository.getStations();
@@ -86,7 +86,7 @@ class StationsTabState extends State<StationsTab>
         ),
       ),
       body: FutureBuilder<List<Station>>(
-        future: getStations(filterText),
+        future: getStations(),
         builder: (BuildContext context, AsyncSnapshot<List<Station>> snapshot) {
           if (snapshot.hasError) {
             // TODO handle error

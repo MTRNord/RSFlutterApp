@@ -78,13 +78,8 @@ class HomePage extends StatelessWidget {
                 ),
               ),
             ),
-            Scaffold(
-              appBar: AppBar(
-                title: Text("Rangliste"),
-              ),
-              body: RankingsTab(
-                railwayStationsRepository: railwayStationsRepository,
-              ),
+            RankingsTab(
+              railwayStationsRepository: railwayStationsRepository,
             ),
             StationsTab(
               railwayStationsRepository: railwayStationsRepository,
