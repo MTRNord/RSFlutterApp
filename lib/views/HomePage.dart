@@ -86,13 +86,8 @@ class HomePage extends StatelessWidget {
                 railwayStationsRepository: railwayStationsRepository,
               ),
             ),
-            Scaffold(
-              appBar: AppBar(
-                title: Text("Bahnhöfe"),
-              ),
-              body: StationsTab(
-                railwayStationsRepository: railwayStationsRepository,
-              ),
+            StationsTab(
+              railwayStationsRepository: railwayStationsRepository,
             ),
             Scaffold(
               appBar: AppBar(
