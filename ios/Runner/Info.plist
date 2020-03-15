@@ -10,6 +10,10 @@
 	<string>$(PRODUCT_BUNDLE_IDENTIFIER)</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+    <string>Bahnhofsfoto auswählen</string>
+	<key>NSCameraUsageDescription</key>
+	<string>Bahnhofsfoto aufnehmen</string>
 	<key>CFBundleName</key>
 	<string>Bahnhofsfotos</string>
 	<key>CFBundlePackageType</key>

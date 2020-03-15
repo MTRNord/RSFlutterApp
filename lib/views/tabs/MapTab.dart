@@ -70,7 +70,7 @@ class MapTabState extends State<MapTab>
           ),
           layers: [
             // Mapbox
-            TileLayerOptions(
+            /*TileLayerOptions(
               //tileSize: 1024,
               zoomOffset: -1,
               urlTemplate:
@@ -80,17 +80,17 @@ class MapTabState extends State<MapTab>
                     'pk.eyJ1IjoibXRybm9yZCIsImEiOiJjaXIyZTRhNDcwMDhwaTJtZzBseTNkancxIn0.09m6ZCFvkKL6Ppss7XAnfA',
                 'id': 'streets-v11',
               },
-            ),
+            ),*/
             // Openstreetmap
             /*TileLayerOptions(
               urlTemplate: "https://{s}.tile.openstreetmap.de/{z}/{x}/{y}.png",
               subdomains: ['a', 'b', 'c'],
             ),*/
             // Transport Map
-            /*TileLayerOptions(
+            TileLayerOptions(
               urlTemplate: "http://tile.memomaps.de/tilegen/{z}/{x}/{y}.png",
               subdomains: [],
-            ),*/
+            ),
             // Railway overlay
             /*TileLayerOptions(
               urlTemplate:

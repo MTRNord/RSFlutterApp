@@ -1,6 +1,9 @@
+import 'dart:io';
+
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:maps_launcher/maps_launcher.dart';
+import 'package:multi_image_picker/multi_image_picker.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../models/models.dart';
@@ -16,6 +19,37 @@ class DetailsPage extends StatelessWidget {
       @required this.railwayStationsRepository})
       : assert(railwayStationsRepository != null),
         super(key: key);
+
+  Future<List<Asset>> _pickImages() async {
+    List<Asset> resultList;
+
+    try {
+      resultList = await MultiImagePicker.pickImages(
+        maxImages: 1,
+        enableCamera: true,
+        materialOptions: MaterialOptions(
+          actionBarTitle: "Albums",
+          allViewTitle: "All images",
+          actionBarColor: "#c71c4d",
+          actionBarTitleColor: "#ffffff",
+          lightStatusBar: false,
+          statusBarColor: '#c71c4d',
+          startInAllView: false,
+          selectCircleStrokeColor: "#000000",
+          selectionLimitReachedText: "You can only upload one image at a time.",
+          autoCloseOnSelectionLimit: true,
+        ),
+      );
+    } on NoImagesSelectedException catch (e) {
+      debugPrint("User selected nothing");
+    } on Exception catch (e) {
+      debugPrint(e.toString());
+    }
+
+    debugPrint(resultList.toString());
+
+    return resultList;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -53,12 +87,29 @@ class DetailsPage extends StatelessWidget {
                 .headline3
                 .copyWith(color: Colors.black),
           ),
-          Image.network(station.photoUrl),
+          station.photoUrl != null
+              ? Image.network(station.photoUrl)
+              : Container(),
+          Expanded(
+            child: Align(
+              alignment: Alignment.bottomCenter,
+              child: IconButton(
+                iconSize: 50,
+                icon: Icon(
+                  Icons.camera_alt,
+                  color: Theme.of(context).primaryColor,
+                ),
+                onPressed: () {
+                  _pickImages();
+                },
+              ),
+            ),
+          ),
           Padding(
-            padding: EdgeInsets.all(8),
+            padding: EdgeInsets.all(24),
             child: Row(
               children: <Widget>[
-                Text("Urheber: "),
+                Text(station.license != "" ? "Urheber: " : ""),
                 RichText(
                   text: TextSpan(
                     text: station.photographer,
@@ -72,7 +123,7 @@ class DetailsPage extends StatelessWidget {
                       },
                   ),
                 ),
-                Text(", "),
+                Text(station.license != "" ? ", " : ""),
                 RichText(
                   text: TextSpan(
                     text: station.license,
